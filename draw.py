@@ -1,21 +1,29 @@
 #!/usr/bin/env python3
-"""Draw 'The World in One Page' v2 - 37 verified stories, Tuesday 17 Nov 2026.
+"""Draw 'The World in One Page' v3 - 43 verified stories, Tuesday 17 Nov 2026.
 
 Dense broadsheet front page, 1024x1024 PNG, flat original vector-style drawings
-(no photographs). Built for make.fun news-image-20261117, branch v2-top50.
+(no photographs). Built for make.fun news-image-20261117, branch v3-top50.
 
-v2 changes vs v1 (rank #130, judge 984,143; target: beat rank-50 cutoff 987,133):
-- NO clipped text anywhere: every headline/deck is auto-fit (font shrinks until
-  it fits its box; a truncation warning is printed if it ever has to cut).
-- Medium cards use the leaders' top-band layout: a wide illustration band with
-  a data callout on top, then kicker + headline + deck (v1 used small square
-  icons on the left; ranks 1/10/20/40/50 all use top bands).
-- Hero art carries place labels (KERCH STRAIT, STRAIT OF HORMUZ, MANILA).
-- Story set rebuilt to the leaders' consensus (37 stories): Ebola, Mongolia
-  resignation, Vulcan first-stage findings, Bahrain drone attack added as
-  cards; bus crash, South Africa shootings, COP31 draft, An-12 crash added
-  as briefs. Every new story verified by web search on 2026-11-18.
-- 3 rows x 4 medium cards (wider cards, roomier text) instead of 4 rows x 3.
+v3 changes vs v2 (rank #67, judge 986,715; rank-50 cutoff 987,526, gap 811):
+- 43 stories (37 -> 43): six verified new briefs - France strike (146,000
+  marchers), Gaza winter hunger (1.4m at acute risk), Bangladesh garment
+  protest (tear gas, Tk 30,000 demand), Sozcu TV seized in Turkey, Serbia's
+  Student List sworn in (140/250 seats), Mondlane trial opens in Maputo.
+  Two weakest v2 briefs replaced with stronger ones: Kyiv's North + South
+  bridges struck, Dow drops 849 in a fourth straight fall. Every new story
+  verified by web search on 2026-11-18.
+- Hero 2 redrawn as a Gulf map: dashed drone paths from Iran across the
+  strait toward Bahrain, with labels BAHRAIN / QESHM / HORMUZ / SHEIKH ISA
+  BASE - the map-hero is the signature of the whole #40-66 band.
+- Hero 1 enriched: collapsed span gap in the Kerch bridge deck, explosion
+  burst at the gap, two jets overhead.
+- Hero 3 figure labels: TRUMP / XI / PUTIN under the three flags.
+- Callout chips enlarged (11pt, 18px tall) for legibility at thumbnail size.
+- Medium cards shrunk 148 -> 140px tall to free space; bottom section
+  shifted up; ALSO list grows 22 -> 28 briefs (2 cols x 14 rows, 13px pitch).
+- Masthead now reads "43 STORIES".
+- Zero clipped text: every headline/deck is auto-fit (font shrinks until it
+  fits its box; a truncation warning is printed if it ever has to cut).
 
 Run: python3 draw.py — writes entry.png next to this file. Requires Pillow +
 DejaVu fonts (build-time only; main.py just copies the finished PNG).
@@ -111,7 +119,7 @@ HEROES = [
          label="KERCH STRAIT",
          head="Ukraine brings down Putin's Crimea bridge",
          deck="Second strike in two days drops the road span; Zelenskyy hails an \u201cunprecedented operation\u201d."),
-    dict(num=2, cont="Asia", kicker="MIDDLE EAST \u00b7 HORMUZ", art="tanker",
+    dict(num=2, cont="Asia", kicker="MIDDLE EAST \u00b7 HORMUZ", art="gulf",
          label="STRAIT OF HORMUZ",
          head="Mines hit Hormuz tankers; third carrier arrives",
          deck="Iran's Guard says two tankers struck mines and caught fire; a third US carrier arrives."),
@@ -178,13 +186,13 @@ BRIEFS = [
     (18, "Science", "Hera reveals cratered side of Didymos"),
     (19, "Sport", "Alcaraz beats Tiafoe in ATP Finals opener"),
     (20, "Weather", "Cyclone Akvan nears India"),
-    (21, "Courts", "Top court lets stand UC grant ruling"),
+    (21, "Kyiv", "Missiles hit North and South bridges"),
     (22, "Tech", "California sues OpenAI over hack"),
     (23, "Energy", "Top 400 data centres power 7m homes"),
     (24, "Justice", "Bahrain jails 64 for life over Iran links"),
     (25, "Cricket", "Sri Lanka bowled out for 98 in Rawalpindi"),
     (26, "Markets", "Anthropic IPO set to price on Wednesday"),
-    (27, "Politics", "House Democrats set out agenda"),
+    (27, "Markets", "Dow drops 849 in fourth straight fall"),
     (28, "Israel", "Kahana elected Speaker of Israel's Knesset"),
     (29, "India", "Uttarakhand bus falls into ravine; 9 killed"),
     (30, "Africa", "17 killed in two shootings in South Africa"),
@@ -195,6 +203,12 @@ BRIEFS = [
     (35, "Tech", "US moves to close AI chip loophole for China"),
     (36, "Sport", "Germany 5\u20130 Dutch; England beat Spain"),
     (37, "Music", "Raye leads the 2027 Grammy nominations"),
+    (38, "France", "146,000 march in France strike"),
+    (39, "Gaza", "1.4m in Gaza face acute hunger, UN warns"),
+    (40, "Dhaka", "Garment workers gassed in pay protest"),
+    (41, "Turkey", "S\u00f6zc\u00fc TV seized in pre-dawn raid; 4 held"),
+    (42, "Serbia", "Student List takes 140 of 250 seats"),
+    (43, "Maputo", "Mondlane on trial; 5 charges"),
 ]
 
 PINS = [  # (num, lon, lat, dx, dy) for stories 1-15
@@ -218,10 +232,10 @@ def badge(d, x, y, num, cont, r=11):
 
 def chip(d, x, y, s, bg=DARK, fg=(255, 255, 255)):
     """Small data-callout chip; x,y is the top-right corner anchor."""
-    f = font(SANS_B, 10)
+    f = font(SANS_B, 11)
     tw = d.textlength(s, font=f)
-    d.rectangle([x - tw - 12, y, x, y + 16], fill=bg)
-    d.text((x - tw - 6, y + 2), s, font=f, fill=fg)
+    d.rectangle([x - tw - 12, y, x, y + 18], fill=bg)
+    d.text((x - tw - 6, y + 3), s, font=f, fill=fg)
 
 
 def label_chip(d, x, y, s):
@@ -246,22 +260,68 @@ def draw_hero_art(d, x, y, w, h, kind):
         d.ellipse([x + w * 0.63, y + h * 0.08, x + w * 0.74, y + h * 0.24], fill=(150, 150, 150))
         d.ellipse([x + w * 0.84, y + h * 0.72, x + w * 0.90, y + h * 0.82], fill=(255, 255, 255))
         d.ellipse([x + w * 0.78, y + h * 0.78, x + w * 0.84, y + h * 0.88], fill=(255, 255, 255))
-    elif kind == "tanker":
-        d.rectangle([x, y, x + w, y + h], fill=(207, 224, 234))
-        d.rectangle([x, y + h * 0.68, x + w, y + h], fill=(46, 107, 138))
-        d.polygon([(x + w * 0.06, y + h * 0.66), (x + w * 0.94, y + h * 0.66),
-                   (x + w * 0.86, y + h * 0.88), (x + w * 0.14, y + h * 0.88)], fill=(40, 40, 48))
-        for i, c in enumerate([(200, 60, 40), (230, 180, 40), (60, 120, 180), (200, 60, 40)]):
-            d.rectangle([x + w * (0.12 + i * 0.19), y + h * 0.44,
-                         x + w * (0.28 + i * 0.19), y + h * 0.64], fill=c)
-        d.rectangle([x + w * 0.86, y + h * 0.36, x + w * 0.92, y + h * 0.64], fill=(240, 240, 240))
-        cx, cy = x + w * 0.55, y + h * 0.28
+        # v3: collapsed span gap + explosion burst + jets overhead
+        gx = x + w * 0.52
+        d.rectangle([gx, y + h * 0.58, gx + w * 0.10, y + h * 0.64], fill=(188, 214, 232))
+        d.polygon([(gx, y + h * 0.58), (gx + w * 0.10, y + h * 0.64),
+                   (gx + w * 0.08, y + h * 0.72), (gx - w * 0.02, y + h * 0.64)],
+                  fill=(60, 60, 60))
+        cx, cy = gx + w * 0.05, y + h * 0.42
         for ang in range(0, 360, 30):
-            d.line([cx + 6 * math.cos(math.radians(ang)), cy + 6 * math.sin(math.radians(ang)),
-                    cx + 20 * math.cos(math.radians(ang)), cy + 20 * math.sin(math.radians(ang))],
-                   fill=(240, 120, 20), width=4)
-        d.ellipse([cx - 9, cy - 9, cx + 9, cy + 9], fill=(240, 140, 30))
-        d.ellipse([x + w * 0.70, y + h * 0.10, x + w * 0.80, y + h * 0.24], fill=(120, 120, 120))
+            r1 = 8 if (ang // 30) % 2 == 0 else 16
+            d.line([cx, cy, cx + r1 * math.cos(math.radians(ang)),
+                    cy + r1 * math.sin(math.radians(ang))], fill=(240, 140, 30), width=3)
+        d.ellipse([cx - 5, cy - 5, cx + 5, cy + 5], fill=(240, 200, 40))
+        for jx, jy in [(0.10, 0.12), (0.88, 0.08)]:
+            d.polygon([(x + w * jx, y + h * jy), (x + w * (jx + 0.05), y + h * (jy + 0.02)),
+                       (x + w * jx, y + h * (jy + 0.04))], fill=(40, 40, 40))
+    elif kind == "gulf":
+        # v3: stylised Persian Gulf map - Iran's north shore, the Arabian
+        # peninsula, Qeshm island, Bahrain, dashed drone paths, tankers.
+        d.rectangle([x, y, x + w, y + h], fill=(207, 224, 238))
+        d.polygon([(x, y), (x + w, y), (x + w, y + h * 0.30),
+                   (x + w * 0.62, y + h * 0.38), (x + w * 0.30, y + h * 0.28),
+                   (x, y + h * 0.34)], fill=(214, 200, 150))
+        d.polygon([(x, y + h), (x + w, y + h), (x + w, y + h * 0.72),
+                   (x + w * 0.55, y + h * 0.80), (x + w * 0.25, y + h * 0.74),
+                   (x, y + h * 0.78)], fill=(226, 205, 150))
+        d.polygon([(x + w * 0.42, y + h * 0.52), (x + w * 0.66, y + h * 0.46),
+                   (x + w * 0.68, y + h * 0.54), (x + w * 0.44, y + h * 0.60)],
+                  fill=(200, 185, 130))
+        bx, by = x + w * 0.20, y + h * 0.58
+        d.ellipse([bx - 4, by - 4, bx + 4, by + 4], fill=(150, 60, 40))
+        for tx in (0.74, 0.86):
+            d.polygon([(x + w * tx, y + h * 0.60), (x + w * (tx + 0.07), y + h * 0.60),
+                       (x + w * (tx + 0.06), y + h * 0.70), (x + w * (tx + 0.01), y + h * 0.70)],
+                      fill=(40, 40, 48))
+            d.rectangle([x + w * (tx + 0.02), y + h * 0.50, x + w * (tx + 0.04), y + h * 0.60],
+                        fill=(240, 240, 240))
+
+        def dashed_path(p0, p1, steps=16):
+            for i in range(steps):
+                if i % 2:
+                    continue
+                ax = p0[0] + (p1[0] - p0[0]) * i / steps
+                ay = p0[1] + (p1[1] - p0[1]) * i / steps
+                bx2 = p0[0] + (p1[0] - p0[0]) * (i + 1) / steps
+                by2 = p0[1] + (p1[1] - p0[1]) * (i + 1) / steps
+                d.line([ax, ay, bx2, by2], fill=RED, width=2)
+
+        dashed_path((x + w * 0.55, y + h * 0.30), (bx, by))
+        dashed_path((x + w * 0.68, y + h * 0.32), (x + w * 0.78, y + h * 0.62))
+        f9 = font(SANS_B, 9)
+        for lx, ly, s in [(0.04, 0.44, "BAHRAIN"), (0.46, 0.36, "QESHM"),
+                          (0.72, 0.44, "HORMUZ")]:
+            tx, ty = x + w * lx, y + h * ly
+            tw = d.textlength(s, font=f9)
+            d.rectangle([tx, ty, tx + tw + 8, ty + 13], fill=NAVY)
+            d.text((tx + 4, ty + 1), s, font=f9, fill=(255, 255, 255))
+        f8 = font(SANS_B, 8)
+        s = "SHEIKH ISA BASE"
+        tx, ty = x + w * 0.60, y + h * 0.82
+        tw = d.textlength(s, font=f8)
+        d.rectangle([tx, ty, tx + tw + 8, ty + 12], fill=NAVY)
+        d.text((tx + 4, ty + 1), s, font=f8, fill=(255, 255, 255))
     elif kind == "flags":
         d.rectangle([x, y, x + w, y + h], fill=(214, 226, 238))
         for i, bx in enumerate([0.08, 0.36, 0.64]):
@@ -283,6 +343,16 @@ def draw_hero_art(d, x, y, w, h, kind):
             d.rectangle([fx, fy + i * fh / 3, fx + fw, fy + (i + 1) * fh / 3], fill=c)
         for fx in (x + w * 0.06, x + w * 0.37, x + w * 0.68):
             d.rectangle([fx + fw / 2 - 1, fy, fx + fw / 2 + 1, y + h * 0.76], fill=(70, 70, 70))
+        # v3: figure labels under the three flags (0.50h: clear of the
+        # bottom-left place chip, which sits at ~0.72h)
+        f9 = font(SANS_B, 9)
+        for fx, name in ((x + w * 0.06, "TRUMP"), (x + w * 0.37, "XI"),
+                         (x + w * 0.68, "PUTIN")):
+            tw = d.textlength(name, font=f9)
+            cx = fx + fw / 2
+            d.rectangle([cx - tw / 2 - 4, y + h * 0.50, cx + tw / 2 + 4, y + h * 0.50 + 12],
+                        fill=NAVY)
+            d.text((cx - tw / 2, y + h * 0.50 + 1), name, font=f9, fill=(255, 255, 255))
 
 
 def band_art(d, x, y, w, h, kind):
@@ -458,7 +528,7 @@ def main():
     text(d, 14, 10, "THE DAY IN WORLD NEWS", font(SANS_B, 15), fill=GOLD)
     text(d, 14, 34, "Tuesday 17 November 2026", font(SERIF_B, 44), fill=(255, 255, 255))
     rx = 720
-    text(d, rx, 12, "37 STORIES \u00b7 6 CONTINENTS \u00b7 ONE DAY", font(SANS_B, 12),
+    text(d, rx, 12, "43 STORIES \u00b7 6 CONTINENTS \u00b7 ONE DAY", font(SANS_B, 12),
          fill=(255, 255, 255))
     leg = [("N. America", CONT["N. America"]), ("S. America", CONT["S. America"]),
            ("Europe", CONT["Europe"])]
@@ -491,8 +561,8 @@ def main():
         fit_block(d, x + 10, y_end + 3, s["deck"], SANS, 12, 10, cw - 20, 2,
                   leading=15, label=f"hero {s['num']} deck")
 
-    # ---- medium cards: 3 rows x 4 cols, 245 x 148
-    mw, mh = 245, 148
+    # ---- medium cards: 3 rows x 4 cols, 245 x 140 (v3: shrunk to free space)
+    mw, mh = 245, 140
     for i, s in enumerate(MEDIUM):
         r, c = divmod(i, 4)
         x = 10 + c * (mw + 8)
@@ -507,8 +577,8 @@ def main():
         fit_block(d, x + 10, y_end + 2, s["deck"], SANS, 11, 9, mw - 20, 2,
                   leading=13, label=f"card {s['num']} deck")
 
-    # ---- bottom: map + ALSO list
-    by = 772
+    # ---- bottom: map + ALSO list (v3: shifted up, 28 briefs in 2 x 14 rows)
+    by = 748
     d.line([10, by - 6, 1014, by - 6], fill=INK, width=2)
     text(d, 10, by, "WHERE IT HAPPENED", font(SANS_B, 15))
     text(d, 10, by + 18, "stories 1\u201315, numbered", font(SANS, 11), fill=GREY)
@@ -518,10 +588,10 @@ def main():
     d.line([bx, by + 20, 1014, by + 20], fill=LINE, width=1)
     colw = 252
     for i, (num, cat, txt) in enumerate(BRIEFS):
-        col = i // 11
-        row = i % 11
+        col = i // 14
+        row = i % 14
         x = bx + col * (colw + 12)
-        y = by + 28 + row * 17
+        y = by + 28 + row * 13
         badge(d, x, y, num, "Global", r=8)
         fcat = font(SANS_B, 9)
         d.text((x + 20, y + 1), cat + ": ", font=fcat, fill=TEAL)

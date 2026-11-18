@@ -1,4 +1,4 @@
-# Stories — Tuesday 17 November 2026 (v2: 37 stories)
+# Stories — Tuesday 17 November 2026 (v3: 43 stories)
 
 Every story here happened or was first reported on Tuesday 17 November 2026.
 Where a claim was disputed on the day, the page attributes it rather than
@@ -74,9 +74,10 @@ Guardian, CNBC, WHO, UN News.
     opening match at the ATP Finals in Turin. (ATP / AP)
 20. **Cyclone Akvan nears India** — Cyclone Akvan approached India's east
     coast, with Andhra Pradesh on alert. (IMD / Reuters)
-21. **Top court lets stand ruling against Trump UC grant cuts** — The US
-    Supreme Court declined to hear the appeal over roughly $150m in UC grants.
-    (Reuters)
+21. **Russian strikes hit Kyiv's North and South bridges** — Russian
+    ballistic missiles struck two of Kyiv's main Dnipro bridges late Monday;
+    both crossings closed and water, heating and power were cut in parts of
+    the capital, mayor Vitali Klitschko said. (Reuters, 17 Nov)
 22. **California sues OpenAI over the Hugging Face hack** — California sued
     OpenAI after the Hugging Face breach exposed user data. (Reuters)
 23. **Top 400 US data centres use power for 7m homes** — The 400 largest US
@@ -88,8 +89,10 @@ Guardian, CNBC, WHO, UN News.
     for 98 in the first Test against Pakistan. (ESPNcricinfo)
 26. **Anthropic IPO set to price on Wednesday** — Anthropic's IPO was set to
     price on Wednesday 18 November. (Reuters)
-27. **House Democrats set out their opening agenda** — House Democrats
-    published their opening legislative agenda. (AP)
+27. **Dow drops 849 in a fourth straight fall** — The Dow fell 848.75
+    points (1.64%) to 50,759.42, its lowest close in five months; the S&P 500
+    fell 1.03% to 7,340.53 and the Nasdaq 0.74%, ahead of Nvidia's earnings.
+    (Reuters, 17 Nov)
 28. **Matan Kahana elected Speaker of Israel's Knesset** — Kahana was elected
     Speaker of the Knesset. (Times of Israel)
 29. **Bus plunges into ravine in Uttarakhand; 9 killed** — A bus travelling
@@ -120,6 +123,43 @@ Guardian, CNBC, WHO, UN News.
     (AP)
 37. **Raye leads the 2027 Grammy nominations** — Raye led the nominations for
     the 2027 Grammy Awards. (AP)
+38. **146,000 march in France public-sector strike** — The interior ministry
+    counted 146,000 demonstrators in Tuesday's nationwide strike over pay and
+    the budget; the CGT union claimed more than 500,000. (Reuters / AFP,
+    17 Nov)
+39. **1.4m in Gaza face acute hunger, UN warns** — The UN said winter rains
+    were deepening the crisis: 1.4 million Gazans face acute hunger, 1.7
+    million remain displaced, and WFP hot meals were cut to one every two
+    days. (UN News, 17 Nov)
+40. **Garment workers gassed in Dhaka pay protest** — Police fired tear gas
+    and sound grenades as garment workers blocked highways demanding a
+    Tk 30,000 minimum wage, up from Tk 12,500. (Reuters / AP, 17 Nov)
+41. **Sözcü TV seized in pre-dawn raid; 4 held** — Turkish authorities raided
+    opposition broadcaster Sözcü TV before dawn, took it off air, appointed
+    a state trustee and detained four executives. (Reuters, 17 Nov)
+42. **Student List takes 140 of 250 seats in Serbia** — Serbia's student-led
+    movement was sworn into parliament, taking 140 of 250 seats after its
+    25 October election win ended 14 years of rule by Vučić's party.
+    (Reuters / AP, 17 Nov)
+43. **Mondlane on trial in Maputo; 5 charges** — Mozambique opposition leader
+    Venâncio Mondlane appeared at the Supreme Court to face five charges,
+    including inciting terrorism, over the 2024 post-election protests; the
+    most serious carries up to 24 years. (Al Jazeera / AP, 17 Nov)
+
+## What changed in v3 (vs the submitted v2, 37 stories)
+
+- Six new briefs, all verified by web search 2026-11-18: France strike (38),
+  Gaza winter hunger (39), Dhaka garment protest (40), Sözcü TV seized (41),
+  Serbia Student List sworn in (42), Mondlane trial opens (43).
+- Two weakest v2 briefs replaced with stronger ones: Kyiv bridges struck
+  (21, was UC grant ruling) and Dow drops 849 (27, was House Democrats
+  agenda).
+- Hero 2 redrawn as a Gulf map with dashed drone paths and labels (BAHRAIN /
+  QESHM / HORMUZ / SHEIKH ISA BASE); hero 1 gains a collapsed span gap,
+  explosion burst and jets; hero 3 gains TRUMP / XI / PUTIN figure labels.
+- Callout chips enlarged; medium cards shrunk 148 → 140px; ALSO list grows
+  22 → 28 briefs (2 cols × 14 rows); masthead now reads "43 STORIES".
+- Zero clipped text, as in v2.
 
 ## What changed in v2 (vs the submitted v1, 33 stories)
 
